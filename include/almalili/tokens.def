@@ -1,0 +1,215 @@
+// Vocabulario léxico de AlmaLili.
+//
+// Este archivo es la única fuente de verdad sobre los tipos de token, las
+// palabras reservadas y los signos. Para ampliar el lenguaje basta con agregar
+// una línea aquí: el enumerado, las tablas de búsqueda y el analizador léxico
+// se generan a partir de estas macros.
+//
+//   TOKEN(Nombre, Categoria, "descripción")  tipo sin grafía fija
+//   RESERVADA(Nombre, "grafía")              palabra reservada (grafía canónica)
+//   SIGNO(Nombre, "grafía")                  operador o signo de puntuación
+//   ALIAS(Nombre, "grafía")                  grafía alternativa de una RESERVADA
+//                                            o de un SIGNO ya declarados
+//
+// Los signos se reconocen por coincidencia más larga, así que el orden de las
+// líneas no importa. Todo el archivo está en UTF-8.
+
+#ifndef TOKEN
+#define TOKEN(nombre, categoria, descripcion)
+#endif
+#ifndef RESERVADA
+#define RESERVADA(nombre, grafia)
+#endif
+#ifndef SIGNO
+#define SIGNO(nombre, grafia)
+#endif
+#ifndef ALIAS
+#define ALIAS(nombre, grafia)
+#endif
+
+// ── Especiales y literales ──────────────────────────────────────────────────
+TOKEN(FinArchivo,      Especial,      "fin de archivo")
+TOKEN(Error,           Especial,      "token inválido")
+TOKEN(Identificador,   Identificador, "identificador")
+TOKEN(LiteralEntero,   Literal,       "literal entero")
+TOKEN(LiteralReal,     Literal,       "literal real")
+TOKEN(LiteralCadena,   Literal,       "literal de cadena")
+TOKEN(LiteralCaracter, Literal,       "literal de carácter")
+TOKEN(Comentario,      Comentario,    "comentario")
+TOKEN(ComentarioDoc,   Comentario,    "comentario de documentación")
+
+// ── Estructura del programa ─────────────────────────────────────────────────
+RESERVADA(PrPrograma,      "programa")
+RESERVADA(PrModulo,        "módulo")
+ALIAS(PrModulo,            "modulo")
+RESERVADA(PrImportar,      "importar")
+RESERVADA(PrExportar,      "exportar")
+RESERVADA(PrDesde,         "desde")
+RESERVADA(PrComo,          "como")
+
+// ── Declaraciones ───────────────────────────────────────────────────────────
+RESERVADA(PrFuncion,       "función")
+ALIAS(PrFuncion,           "funcion")
+RESERVADA(PrProcedimiento, "procedimiento")
+RESERVADA(PrDevolver,      "devolver")
+ALIAS(PrDevolver,          "retornar")
+ALIAS(PrDevolver,          "regresar")
+RESERVADA(PrVariable,      "variable")
+ALIAS(PrVariable,          "var")
+RESERVADA(PrConstante,     "constante")
+ALIAS(PrConstante,         "const")
+RESERVADA(PrTipo,          "tipo")
+RESERVADA(PrClase,         "clase")
+RESERVADA(PrEstructura,    "estructura")
+RESERVADA(PrInterfaz,      "interfaz")
+RESERVADA(PrEnumeracion,   "enumeración")
+ALIAS(PrEnumeracion,       "enumeracion")
+ALIAS(PrEnumeracion,       "enum")
+RESERVADA(PrExtiende,      "extiende")
+RESERVADA(PrImplementa,    "implementa")
+RESERVADA(PrPublico,       "público")
+ALIAS(PrPublico,           "publico")
+RESERVADA(PrPrivado,       "privado")
+RESERVADA(PrProtegido,     "protegido")
+RESERVADA(PrEstatico,      "estático")
+ALIAS(PrEstatico,          "estatico")
+RESERVADA(PrAbstracto,     "abstracto")
+RESERVADA(PrNuevo,         "nuevo")
+RESERVADA(PrEste,          "este")
+
+// ── Control de flujo ────────────────────────────────────────────────────────
+RESERVADA(PrSi,            "si")
+RESERVADA(PrSino,          "sino")
+RESERVADA(PrMientras,      "mientras")
+RESERVADA(PrHacer,         "hacer")
+RESERVADA(PrRepetir,       "repetir")
+RESERVADA(PrHasta,         "hasta")
+RESERVADA(PrPara,          "para")
+RESERVADA(PrCada,          "cada")
+RESERVADA(PrEn,            "en")
+RESERVADA(PrPaso,          "paso")
+RESERVADA(PrSegun,         "según")
+ALIAS(PrSegun,             "segun")
+RESERVADA(PrCaso,          "caso")
+RESERVADA(PrOtro,          "otro")
+RESERVADA(PrRomper,        "romper")
+ALIAS(PrRomper,            "interrumpir")
+RESERVADA(PrContinuar,     "continuar")
+RESERVADA(PrIntentar,      "intentar")
+RESERVADA(PrAtrapar,       "atrapar")
+ALIAS(PrAtrapar,           "capturar")
+RESERVADA(PrFinalmente,    "finalmente")
+RESERVADA(PrLanzar,        "lanzar")
+
+// ── Tipos primitivos ────────────────────────────────────────────────────────
+RESERVADA(PrEntero,        "entero")
+RESERVADA(PrNatural,       "natural")
+RESERVADA(PrReal,          "real")
+ALIAS(PrReal,              "decimal")
+RESERVADA(PrLogico,        "lógico")
+ALIAS(PrLogico,            "logico")
+ALIAS(PrLogico,            "booleano")
+RESERVADA(PrCaracter,      "carácter")
+ALIAS(PrCaracter,          "caracter")
+RESERVADA(PrCadena,        "cadena")
+RESERVADA(PrVacio,         "vacío")
+ALIAS(PrVacio,             "vacio")
+
+// ── Constantes del lenguaje ─────────────────────────────────────────────────
+RESERVADA(PrVerdadero,     "verdadero")
+ALIAS(PrVerdadero,         "cierto")
+RESERVADA(PrFalso,         "falso")
+RESERVADA(PrNulo,          "nulo")
+
+// ── Entrada y salida ────────────────────────────────────────────────────────
+RESERVADA(PrImprimir,      "imprimir")
+ALIAS(PrImprimir,          "escribir")
+RESERVADA(PrLeer,          "leer")
+
+// ── Agrupación y puntuación ─────────────────────────────────────────────────
+SIGNO(ParentesisIzq,       "(")
+SIGNO(ParentesisDer,       ")")
+SIGNO(CorcheteIzq,         "[")
+SIGNO(CorcheteDer,         "]")
+SIGNO(LlaveIzq,            "{")
+SIGNO(LlaveDer,            "}")
+SIGNO(Coma,                ",")
+SIGNO(PuntoYComa,          ";")
+SIGNO(DosPuntos,           ":")
+SIGNO(DobleDosPuntos,      "::")
+SIGNO(Punto,               ".")
+SIGNO(Rango,               "..")
+SIGNO(RangoInclusivo,      "..=")
+SIGNO(Elipsis,             "...")
+ALIAS(Elipsis,             "…")
+SIGNO(Flecha,              "->")
+ALIAS(Flecha,              "→")
+SIGNO(FlechaGruesa,        "=>")
+ALIAS(FlechaGruesa,        "⇒")
+SIGNO(Arroba,              "@")
+SIGNO(InterrogacionAbre,   "¿")
+SIGNO(InterrogacionCierra, "?")
+SIGNO(ExclamacionAbre,     "¡")
+SIGNO(FusionNula,          "??")
+SIGNO(AccesoSeguro,        "?.")
+
+// ── Aritmética ──────────────────────────────────────────────────────────────
+SIGNO(Mas,                 "+")
+SIGNO(Menos,               "-")
+ALIAS(Menos,               "−")
+SIGNO(Asterisco,           "*")
+ALIAS(Asterisco,           "×")
+SIGNO(Diagonal,            "/")
+ALIAS(Diagonal,            "÷")
+SIGNO(Porcentaje,          "%")
+SIGNO(Potencia,            "**")
+SIGNO(Incremento,          "++")
+SIGNO(Decremento,          "--")
+
+// ── Asignación ──────────────────────────────────────────────────────────────
+SIGNO(Asignar,             "=")
+ALIAS(Asignar,             "←")
+SIGNO(Definir,             ":=")
+SIGNO(MasIgual,            "+=")
+SIGNO(MenosIgual,          "-=")
+SIGNO(PorIgual,            "*=")
+SIGNO(EntreIgual,          "/=")
+SIGNO(ModuloIgual,         "%=")
+SIGNO(PotenciaIgual,       "**=")
+SIGNO(YBitIgual,           "&=")
+SIGNO(OBitIgual,           "|=")
+SIGNO(XorBitIgual,         "^=")
+SIGNO(DesplazarIzqIgual,   "<<=")
+SIGNO(DesplazarDerIgual,   ">>=")
+
+// ── Comparación ─────────────────────────────────────────────────────────────
+SIGNO(Igual,               "==")
+SIGNO(Distinto,            "!=")
+ALIAS(Distinto,            "≠")
+SIGNO(Menor,               "<")
+SIGNO(Mayor,               ">")
+SIGNO(MenorIgual,          "<=")
+ALIAS(MenorIgual,          "≤")
+SIGNO(MayorIgual,          ">=")
+ALIAS(MayorIgual,          "≥")
+
+// ── Lógica ──────────────────────────────────────────────────────────────────
+SIGNO(YLogico,             "&&")
+ALIAS(YLogico,             "∧")
+SIGNO(OLogico,             "||")
+ALIAS(OLogico,             "∨")
+SIGNO(NoLogico,            "!")
+ALIAS(NoLogico,            "¬")
+
+// ── Bits ────────────────────────────────────────────────────────────────────
+SIGNO(YBit,                "&")
+SIGNO(OBit,                "|")
+SIGNO(XorBit,              "^")
+SIGNO(NoBit,               "~")
+SIGNO(DesplazarIzq,        "<<")
+SIGNO(DesplazarDer,        ">>")
+
+#undef TOKEN
+#undef RESERVADA
+#undef SIGNO
+#undef ALIAS

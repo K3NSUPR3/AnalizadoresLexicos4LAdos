@@ -1,0 +1,12 @@
+// Cada línea de este archivo provoca un diagnóstico léxico distinto.
+variable saludo = "hola;
+variable letra = 'ab';
+variable vacía = '';
+variable precio = 12pesos;
+variable enorme = 99999999999999999999;
+variable máscara = 0b;
+variable miles = 1__000;
+variable ruta = "C:\qué";
+variable costo = $50;
+variable acento = ´;
+/* comentario sin cerrar

@@ -1,0 +1,41 @@
+/// Programa de muestra de AlmaLili: recorre casi todo el vocabulario léxico.
+programa Muestra;
+
+importar raíz desde "estándar/matemáticas";
+
+constante PI: real = 3.141_592_653;
+constante MÁXIMO: entero = 0xFF;
+constante MÁSCARA: natural = 0b1010_0101;
+
+/** Calcula el área de un círculo a partir de su radio. */
+función área_círculo(radio: real) → real {
+    devolver PI × radio ** 2;
+}
+
+función principal() {
+    variable año: entero = 2_026;
+    variable niños: natural = 3;
+    variable saludo: cadena = «¡Hola, "México"!»;
+    variable frase ← “El «pingüino» saluda”;
+    variable inicial: carácter = 'ñ';
+    variable poema = """
+        Árbol, canción,
+        corazón.
+    """;
+
+    /* Los comentarios de bloque /* se pueden anidar */ sin problema. */
+    si (año ≥ 2_000 && niños ≠ 0) {
+        imprimir("Área: ", área_círculo(2.5e0), "\n");
+    } sino {
+        imprimir("Sin datos\t\u{1F335}\n");
+    }
+
+    para cada n en 1..=niños {
+        mientras (n ≤ 10 || ¬listo) { n += 1; }
+    }
+
+    según (inicial) {
+        caso 'ñ': regresar verdadero;
+        otro:     regresar falso;
+    }
+}
