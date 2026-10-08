@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AlmaLili
 
 Compilador de AlmaLili, un lenguaje de programación con vocabulario en español,
@@ -109,3 +110,7 @@ partir de la base de datos Unicode de la versión de Python instalada.
 - La normalización de identificadores compone pares letra + marca; no es NFC
   completa (no reordena varias marcas sobre una misma letra).
 - Los archivos fuente se limitan a 4 GiB.
+=======
+# AnalizadoresLexicos4LAdos
+Analizador léxico básico para la ejecución y capacitación de proyectos de investigación 
+>>>>>>> 23ffc08bbd0931e9b6d3d77f4916746f8581cd52
